@@ -1,4 +1,4 @@
-[![HuggingFace Space](https://img.shields.io/badge/🤗-HuggingFace%20Space-cyan.svg)](https://huggingface.co/spaces/neonwatty/youtube_downloader)[Python application](https://github.com/neonwatty/youtube_downloader/actions/workflows/python-app.yml/badge.svg)](https://github.com/neonwatty/youtube_downloader/actions/workflows/python-app.yml/python-app.yml)
+[![HuggingFace Space](https://img.shields.io/badge/🤗-HuggingFace%20Space-cyan.svg)](https://huggingface.co/spaces/neonwatty/youtube_downloader) [![Python application](https://github.com/neonwatty/youtube_downloader/actions/workflows/python-app.yml/badge.svg)](https://github.com/neonwatty/youtube_downloader/actions/workflows/python-app.yml/python-app.yml)
 
 # a simple youtube_downloader app
 
