@@ -15,3 +15,5 @@ Or run via Docker
 ```sh
 docker compose up
 ```
+
+If running natively (not Docker) you will need [ffmpeg](https://www.ffmpeg.org/download.html) installed on your machine.

@@ -29,16 +29,18 @@ with gr.Blocks(theme=gr.themes.Soft(), title=" youtube downloader") as demo:
 
                 with gr.Row():
                     og_video = gr.Video(
-                        visible=False,
+                        visible=True,
+                        show_download_button=True,
+                        show_label=True,
+                        label="your video",
+                        format="mp4",
+                        width="50vw",
+                        height="50vw",
                     )
 
                 @download_button.click(inputs=[url_input, resolution_dropdown], outputs=[og_video])
                 def download_this(url_input, resolution_dropdown):
-                    # temporary_video_location = tmpdirname + "/original_" + str(uuid.uuid4()) + ".mp4"
-                    # temporary_audio_location = temporary_video_location.replace("mp4", "mp3")
-
-                    temporary_video_location = download_video(url_input, tmpdirname)
-                    temporary_audio_location = temporary_video_location.replace("mp4", "mp3")
+                    temporary_video_location = download_video(url_input, tmpdirname, resolution_dropdown)
 
                     filename = open(temporary_video_location, "rb")
                     byte_file = io.BytesIO(filename.read())
@@ -58,6 +60,19 @@ with gr.Blocks(theme=gr.themes.Soft(), title=" youtube downloader") as demo:
 
                     return new_og_video
 
+        with gr.TabItem("💡 About"):
+            with gr.Blocks() as about:
+                gr.Markdown(
+                    (
+                        "### About \n"
+                        "Some notes on how this works: \n\n"
+                        "1.  **youtube / google login**: you do **not** need to be logged into a google account to use the app, with one exception: age restricted videos"
+                        "2.  **age restricted videos**: this app cannot fetch age restricted videos yet, which requires a user login to google / youtube - this feature is not yet available"
+                        "3.  **video resolution**: not all videos have all possible resolutions, so you may not be able to fetch the resolution you want for some videos (as they don't exist) \n"
+                        "4.  **recommended hardware**: this is a very light weight app, so minimum specs should work fine"
+                        "5.  **proxies**: there is an option in the yt_download module to enter proxy server ips"
+                    )
+                )
 
 
 if __name__ == "__main__":
