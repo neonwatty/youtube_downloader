@@ -1,0 +1,8 @@
+services:
+  youtube_downloader:
+    build:
+      context: .
+    image: youtube_downloader
+    container_name: youtube_downloader
+    ports:
+      - 7860:7860

@@ -1,3 +1,2 @@
-pytube
-moviepy  # make sure ffmpeg is installed on your machine!
-streamlit
+yt-dlp
+gradio==4.38.1
