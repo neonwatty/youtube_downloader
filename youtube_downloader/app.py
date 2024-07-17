@@ -105,9 +105,7 @@ with base:
 
         col2, col3, col4 = st.columns([3, 2, 3])
         with col2:
-            check_button_val = st.button(
-                label="fetch available streams", type="primary"
-            )
+            check_button_val = st.button(label="fetch available streams", type="primary")
         with col3:
             panel = st.container()
         with col4:
@@ -157,15 +155,9 @@ def get_set_streams(url: str) -> None:
 def download_button_logic(download_button_val: bool):
     if download_button_val:
         if st.session_state["a_v_selection_index"] == 0:
-            if (
-                st.session_state["a_selection_index"] == 0
-                and st.session_state["v_selection_index"] == 0
-            ):
+            if st.session_state["a_selection_index"] == 0 and st.session_state["v_selection_index"] == 0:
                 st.warning("please make a selection", icon="⚠️")
-            elif (
-                st.session_state["a_selection_index"] == 0
-                or st.session_state["v_selection_index"] == 0
-            ):
+            elif st.session_state["a_selection_index"] == 0 or st.session_state["v_selection_index"] == 0:
                 st.warning(
                     "if video only value chosen so must audio only value and vice-versa",
                     icon="⚠️",
@@ -174,7 +166,7 @@ def download_button_logic(download_button_val: bool):
                 with st.spinner(text="download in progress..."):
                     savedir = os.path.expanduser("~/Downloads")
                     vid_col, img_col = st.columns([10, 1])
-                    
+
                     # download audio/video jointly
                     audio_index = st.session_state["a_selection_index"]
                     audio_only_streams = st.session_state["audio_only_streams"]
@@ -200,13 +192,10 @@ def download_button_logic(download_button_val: bool):
                         st.subheader(st.session_state["yt_title"])
                         video_file = open(video_savepath, "rb")
                         video_bytes = video_file.read()
-                        st.video(video_bytes)                            
-                            
+                        st.video(video_bytes)
+
         else:
-            if (
-                st.session_state["a_selection_index"] != 0
-                or st.session_state["v_selection_index"] != 0
-            ):
+            if st.session_state["a_selection_index"] != 0 or st.session_state["v_selection_index"] != 0:
                 st.warning(
                     "cannot chose option for audio/video joint, video only, and audio only",
                     icon="⚠️",
@@ -234,11 +223,12 @@ def download_button_logic(download_button_val: bool):
                         video_bytes = video_file.read()
                         st.video(video_bytes)
 
+
 def render_panel():
     my_panel = st.empty()
     with my_panel.container(border=True):
         a_selection, v_selection, a_v_selection = None, None, None
-                
+
         with col_a:
             a_v_selection = st.selectbox(
                 "joint selection (fps)",
@@ -247,9 +237,7 @@ def render_panel():
                 placeholder="Select video fps",
             )
             if a_v_selection:
-                st.session_state["a_v_selection_index"] = list(
-                    st.session_state["audio_video_choices"]
-                ).index(a_v_selection)
+                st.session_state["a_v_selection_index"] = list(st.session_state["audio_video_choices"]).index(a_v_selection)
             else:
                 st.session_state["a_v_selection_index"] = 0
 
@@ -261,9 +249,7 @@ def render_panel():
                 placeholder="Select video fps",
             )
             if v_selection:
-                st.session_state["v_selection_index"] = list(
-                    st.session_state["video_only_choices"]
-                ).index(v_selection)
+                st.session_state["v_selection_index"] = list(st.session_state["video_only_choices"]).index(v_selection)
             else:
                 st.session_state["v_selection_index"] = 0
 
@@ -275,16 +261,12 @@ def render_panel():
                 placeholder="Select audio kbps",
             )
             if a_selection:
-                st.session_state["a_selection_index"] = list(
-                    st.session_state["audio_only_choices"]
-                ).index(a_selection)
+                st.session_state["a_selection_index"] = list(st.session_state["audio_only_choices"]).index(a_selection)
             else:
                 st.session_state["a_selection_index"] = 0
 
         # download button
-        download_button_val = st.button(
-            label="download selected streams", type="primary"
-        )
+        download_button_val = st.button(label="download selected streams", type="primary")
         download_button_logic(download_button_val)
     st.session_state["panel"] = my_panel
 
@@ -306,5 +288,5 @@ if st.session_state["stream_button_pressed"]:
 with st.spinner(text="streams pull in progress..."):
     try:
         streams_button_logic(st.session_state["url"])
-    except:
+    except:  # noqa E722
         pass

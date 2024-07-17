@@ -13,9 +13,7 @@ def is_valid_youtube_url(url: str) -> bool:
     return re.match(pattern, url) is not None
 
 
-def get_yt_streams(
-    url: str, my_proxies: dict = {}
-) -> Tuple[YouTube, str, str, StreamQuery, StreamQuery, StreamQuery]:
+def get_yt_streams(url: str, my_proxies: dict = {}) -> Tuple[YouTube, str, str, StreamQuery, StreamQuery, StreamQuery]:
     try:
         # validate url
         if is_valid_youtube_url(url):
@@ -23,18 +21,10 @@ def get_yt_streams(
             yt = YouTube(url, proxies=my_proxies)
 
             # audio only streams
-            audio_only_streams = (
-                yt.streams.filter(file_extension="mp4", only_audio=True, type="audio")
-                .order_by("abr")
-                .asc()
-            )
+            audio_only_streams = yt.streams.filter(file_extension="mp4", only_audio=True, type="audio").order_by("abr").asc()
 
             # video only streams
-            video_only_streams = (
-                yt.streams.filter(file_extension="mp4", only_video=True, type="video")
-                .order_by("resolution")
-                .asc()
-            )
+            video_only_streams = yt.streams.filter(file_extension="mp4", only_video=True, type="video").order_by("resolution").asc()
 
             # audio and video joint streams
             audio_video_streams = (
@@ -48,7 +38,7 @@ def get_yt_streams(
                 .order_by("resolution")
                 .asc()
             )
-            
+
             # get title and thumbnail
             yt_title = yt.title.replace("/", " ")
             yt_thumbnail_url = yt.thumbnail_url
