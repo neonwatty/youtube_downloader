@@ -47,4 +47,4 @@ jobs:
         pip install -r requirements.txt
     - name: Run pytest
       run: |
-        PYTHONPATH=. python3.10 -m pytest tests/test_streamlit.py
+        PYTHONPATH=. python3.10 -m pytest tests/test_app.py
